@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: atharva-run-
+  namespace: atharva-ml
+spec:
+  serviceAccountName: wf-runner
+  workflowTemplateRef:
+    name: atharva-train-merge
+  arguments:
+    parameters:
+    - name: max-steps
+      value: "100"
