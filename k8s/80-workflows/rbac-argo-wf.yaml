@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: wf-runner
+  namespace: atharva-ml
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: wf-runner-role
+  namespace: atharva-ml
+rules:
+- apiGroups: [""]
+  resources: ["pods","pods/log","pods/exec","secrets","configmaps","persistentvolumeclaims","events"]
+  verbs: ["create","get","list","watch","update","patch","delete"]
+- apiGroups: ["batch"]
+  resources: ["jobs"]
+  verbs: ["create","get","list","watch","delete"]
+- apiGroups: ["argoproj.io"]
+  resources: ["workflowtaskresults","workflowtasksets"]
+  verbs: ["create","get","list","watch","update","patch","delete"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: wf-runner-rb
+  namespace: atharva-ml
+subjects:
+- kind: ServiceAccount
+  name: wf-runner
+  namespace: atharva-ml
+roleRef:
+  kind: Role
+  name: wf-runner-role
+  apiGroup: rbac.authorization.k8s.io

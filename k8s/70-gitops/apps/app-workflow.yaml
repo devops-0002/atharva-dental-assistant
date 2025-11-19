@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: workflows
+  namespace: atharva-ml
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  project: atharva
+  source:
+    repoURL: https://github.com/devops-0002/atharva-dental-assistant.git
+    targetRevision: main
+    path: 80-workflows
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: atharva-app
+  syncPolicy:
+    automated: { prune: true, selfHeal: true }
