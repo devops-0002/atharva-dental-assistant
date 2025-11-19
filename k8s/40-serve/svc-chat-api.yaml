@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: atharva-chat-api
   namespace: atharva-app
+  labels:
+    app: atharva-chat-api
 spec:
   type: NodePort
   selector: { app: atharva-chat-api }
@@ -11,4 +13,3 @@ spec:
     port: 8080
     targetPort: 8080
     nodePort: 30300
-

@@ -70,6 +70,6 @@ spec:
     volumes:
       - name: model
         image:
-          reference: xxxxxx/smollm2-135m-merged:v1
+          reference: initcron/smollm2-135m-merged:v1
           pullPolicy: IfNotPresent
 

@@ -18,7 +18,7 @@ spec:
         command: ["bash","-lc"]
         args:
           - |
-            pip install --no-cache-dir fastapi==0.112.2 uvicorn==0.30.6 httpx==0.27.2
+            pip install --no-cache-dir fastapi==0.112.2 uvicorn==0.30.6 httpx==0.27.2 prometheus-client>=0.20.0
             uvicorn chat_api:app --host 0.0.0.0 --port 8080 --proxy-headers
         envFrom:
         - configMapRef: { name: chat-api-config }
@@ -27,6 +27,13 @@ spec:
           mountPath: /workspace
           subPath: atharva-dental-assistant/serving
         ports: [{ containerPort: 8080 }]
+        resources:
+          requests:
+            cpu: "50m"
+            memory: "64Mi"
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
         readinessProbe:
           httpGet: { path: /health, port: 8080 }
           initialDelaySeconds: 5

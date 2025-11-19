@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: atharva-retriever
   namespace: atharva-ml
+  labels: 
+    app: retriever
 spec:
   type: NodePort
   selector: { app: retriever }
