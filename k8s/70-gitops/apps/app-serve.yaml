@@ -21,7 +21,4 @@ spec:
       kind: RawDeployment
       jsonPointers:
         - /spec/deployments/0/replicas    # controller may reconcile
-  syncOptions:
-    - Validate=true
-    - PrunePropagationPolicy=background
   revisionHistoryLimit: 5
